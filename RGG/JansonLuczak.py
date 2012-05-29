@@ -10,18 +10,27 @@ This is RGG v. 1.0.
 
 import numpy as np
 import utils    
+import networkx as nx
+import random as rnd
+
+
 
 # number of vertices
 n = 1000000
+
+# create an empty graph on n vertices
+G = nx.empty_graph(n)
+
 
 # power of the model
 beta = 1.7
 
 # average degree of the graph
-mean_degree = 1000
+mean_degree = 10000
 
 # generate a power-law array with defined parameters
-powerLawArray = utils.powelawArray(n, beta, mean_degree)
+powerLawArray = utils.powerLawArray(n, beta, mean_degree)
+print np.max(powerLawArray)
 
 # as stated in Chung-Lu article we create an array of ints just taking the lower bound of the values
 # from the power-law sequence
@@ -36,15 +45,27 @@ sumOfDegrees = powerLawDegreeArray.sum()
 print sumOfDegrees
 
 
+
 # array of delimiters
 delimiterArray = np.cumsum(powerLawDegreeArray)
 delimiterArray = np.insert(delimiterArray, 0, 0) #adding 0 to the beginning
 delimiterArray = np.delete(delimiterArray, n) # final edition of delimiterArray
 
+
+
 #print delimiterArray[678]
 #print delimiterArray[679]
-print np.searchsorted(delimiterArray, delimiterArray[678] + 1) #defines number of vertex to which picked dot corresponds
+
+a = 0
+for i in range(n):
+    for j in range(1, delimiterArray[i] - delimiterArray[i-1]):
+        a += 1
+
+
+
+#defines number of vertex to which picked dot corresponds
 print '\n'
+nx.write_adjlist(G, "file_adj")
 #print delimiterArray[n-1]
 #print np.searchsorted(delimiterArray, delimiterArray[n - 1] + 1)
 

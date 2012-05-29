@@ -7,12 +7,13 @@ some auxilary functions and classes to be defined here
 '''
 
 import networkx.utils as nu
+import networkx as nx
 import numpy as np
 
 #def is_valid_degree_sequence(sequence):
     
 
-def powelawArray(n, beta, mean_degree):
+def powerLawArray(n, beta, mean_degree):
     powerLawSequence = nu.powerlaw_sequence(n, beta)
     powerLawArr = np.array(powerLawSequence)
     initialSum = np.sum(powerLawArr)
