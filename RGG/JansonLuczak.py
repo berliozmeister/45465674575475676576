@@ -16,7 +16,7 @@ import random as rnd
 
 
 # number of vertices
-n = 1000000
+n = 10000
 
 # create an empty graph on n vertices
 G = nx.empty_graph(n)
@@ -26,7 +26,7 @@ G = nx.empty_graph(n)
 beta = 1.7
 
 # average degree of the graph
-mean_degree = 10000
+mean_degree = 50
 
 # generate a power-law array with defined parameters
 powerLawArray = utils.powerLawArray(n, beta, mean_degree)
@@ -57,15 +57,15 @@ delimiterArray = np.delete(delimiterArray, n) # final edition of delimiterArray
 #print delimiterArray[679]
 
 a = 0
-for i in range(n):
-    for j in range(1, delimiterArray[i] - delimiterArray[i-1]):
-        a += 1
+for i in list(range(sumOfDegrees)):
+    G.add_edge(np.searchsorted(delimiterArray, rnd.randrange(sumOfDegrees)), np.searchsorted(delimiterArray, rnd.randrange(sumOfDegrees)))
+nx.write_adjlist(G, 'adj_matrix')
 
 
 
 #defines number of vertex to which picked dot corresponds
 print '\n'
-nx.write_adjlist(G, "file_adj")
+#nx.write_adjlist(G, "file_adj")
 #print delimiterArray[n-1]
 #print np.searchsorted(delimiterArray, delimiterArray[n - 1] + 1)
 
