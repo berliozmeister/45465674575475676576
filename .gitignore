@@ -1,5 +1,5 @@
 *.pyc
-RGG/generated/*
+RGG/generated/*.svg
 *.tex
 *.log
 *.zip
