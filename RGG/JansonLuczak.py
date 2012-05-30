@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Created on 24.05.2012
 
@@ -30,13 +31,14 @@ mean_degree = 50
 
 # generate a power-law array with defined parameters
 powerLawArray = utils.powerLawArray(n, beta, mean_degree)
-print np.max(powerLawArray)
+print np.max(powerLawArray) #может просто последний элемент печатать? впрочем, неважно
 
 # as stated in Chung-Lu article we create an array of ints just taking the lower bound of the values
 # from the power-law sequence
 
 #powerLawDegreeSequence = [0]*n
 powerLawDegreeArray = np.array(powerLawArray, dtype = np.longlong)
+
 print powerLawDegreeArray.size
 
 
@@ -57,8 +59,10 @@ delimiterArray = np.delete(delimiterArray, n) # final edition of delimiterArray
 #print delimiterArray[679]
 
 a = 0
+#нафига тут list и range? xrange OK.
 for i in list(range(sumOfDegrees)):
-    G.add_edge(np.searchsorted(delimiterArray, rnd.randrange(sumOfDegrees)), np.searchsorted(delimiterArray, rnd.randrange(sumOfDegrees)))
+    G.add_edge(np.searchsorted(delimiterArray, rnd.randrange(sumOfDegrees)),
+               np.searchsorted(delimiterArray, rnd.randrange(sumOfDegrees)))
 nx.write_adjlist(G, 'adj_matrix')
 
 

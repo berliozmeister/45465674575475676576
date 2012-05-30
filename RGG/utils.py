@@ -5,7 +5,7 @@ Created on 24.05.2012
 
 some auxilary functions and classes to be defined here
 '''
-
+import math
 import networkx.utils as nu
 import networkx as nx
 import numpy as np
@@ -18,12 +18,9 @@ def powerLawArray(n, beta, mean_degree):
     powerLawArr = np.array(powerLawSequence)
     initialSum = np.sum(powerLawArr)
     expectedSum = mean_degree * n
-    if initialSum == expectedSum:
-        return powerLawArr
-    else:
-        for i in range(n):
-            powerLawArr[i] *= (expectedSum / initialSum)
-        return powerLawArr
+    for i in xrange(n):
+        powerLawArr[i] = powerLawArr[i] * 1.0 * expectedSum / initialSum
+    return powerLawArr
 
 def parsum(s):
     count = 0
